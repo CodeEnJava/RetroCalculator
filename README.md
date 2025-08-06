@@ -56,12 +56,16 @@ N'hésitez pas à liker 👍, commenter 💬 et vous abonner 🔔 pour suivre l'
 3. Compile et exécute les fichiers nécessaires (Display, MyJButton, etc.).
 
 4. Lance les tests pour valider le bon fonctionnement.
+5. 
+---
 
 📬 Feedback
 Une question ? Une suggestion ?
 👉 Ouvre une issue ou laisse un commentaire sous la vidéo !
 
+---
+
 🛠️ Auteur
 [BAROIS Stéphane]
-📺 Chaîne YouTube : [CodeEnJava]
+📺 Chaîne YouTube : [https://www.youtube.com/@BSDEV-JAVA]
 🐙 GitHub : @CodeEnJava
