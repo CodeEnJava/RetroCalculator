@@ -14,11 +14,17 @@ Ce dépôt accompagne la vidéo YouTube dans laquelle je présente :
 ## 🎥 Vidéo associée
 
 📺 [Tutoriel complet: Machine à calculer vidéo #01](https://youtu.be/NSv7G6BjLSU)
+---
 📺 [Tutoriel complet: Machine à calculer vidéo #02](https://youtu.be/p3Xi-TKfWFk)
+---
 📺 [Tutoriel complet: Machine à calculer vidéo #03](https://youtu.be/jhEussydqSQ)
+---
 📺 [Tutoriel complet: Machine à calculer vidéo #04](https://youtu.be/D9wVSBtzFjw)
+---
 📺 [Tutoriel complet: Machine à calculer vidéo #05](https://youtu.be/jhEussydqSQ)
+---
 📺 [Tutoriel complet: Machine à calculer vidéo #06](https://youtu.be/p3Xi-TKfWFk)
+---
 📺 [Tutoriel complet: Machine à calculer vidéo #07](https://youtu.be/dMaO03xb8X0)
 
 N'hésitez pas à liker 👍, commenter 💬 et vous abonner 🔔 pour suivre l'évolution du projet et d'autres tutoriels Java !
