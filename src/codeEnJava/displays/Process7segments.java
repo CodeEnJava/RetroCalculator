@@ -26,7 +26,6 @@ public class Process7segments implements Runnable{
 		while(runnable) {
 			
 			System.out.println(StringColor.stringColor("Communication vers l'afficheur", "#00FF7F"));
-			
 			String strVal = Lecture.stringReader("Entrer la valeur à afficher : ", "#FF7F00", 1, 2);
 			
 			this.digit[1].setValue(strVal); // injection du caractère vers l'afficheur

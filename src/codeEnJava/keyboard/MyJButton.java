@@ -4,59 +4,34 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
-public class MyJButton extends JButton {
+public class MyJButton extends JButton implements ConfigKeyboard{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6754909011912247331L;
-	
-	// mise en place des parametres par défaut
-	private static final int 	HEIGHT_DEFAULT						= 100; 
-	private static final int 	WIDTH_DEFAULT						= 100; 
-	private static final int 	RADIUS_DEFAULT						= 10;
-	private static final int 	BORDER_DEFAULT						= 10; 
-	
-	private static final int 	FONTSIZE_DEFAULT					= 30; 
-	
-	// les couleurs du background en fonction de l'évenement
-	private static final String BACKGROUND_COLOR_DEFAULT   		 = "#00AA10";
-	private static final String BACKGROUND_HOVER_COLOR_DEFAULT   = "#AA2010";
-	private static final String BACKGROUND_PRESSED_COLOR_DEFAULT = "#1020BB";
-	
-	// les couleurs de la bordure en fonction de l'évenement
-	private static final String BORDER_COLOR_DEFAULT   			 = "#77AA10";
-	private static final String BORDER_HOVER_COLOR_DEFAULT   	 = "#AA2077";
-	private static final String BORDER_PRESSED_COLOR_DEFAULT   	 = "#7720BB";
-	
-	// les couleurs du texte en fonction de l'évenement
-	private static final String TEXT_COLOR_DEFAULT   			 = "#DDDDDD";
-	private static final String TEXT_HOVER_COLOR_DEFAULT   		 = "#AAAAAA";
-	private static final String TEXT_PRESSED_COLOR_DEFAULT   	 = "#EEEEEE";
-	
 	// les attributs de l'objet MyjButton
-	private Font font 		=null;
+	private Font font 					 = null;
 	private int  height;
 	private int  width;
 	private int  radius;
 	private int  border;
 	
-	private int pos_x_text = 14;
-	private int pos_y_text = 29;
+	private int pos_x_text = 0;// modif avant 14
+	private int pos_y_text = 0;// modif avant 29
 	
 	private Color backgroundColor 		 = null;
 	private Color backgroundHoveredColor = null;
 	private Color backgroundPressedColor = null;
 	
 	private Color borderColor 			 = null;
-	private Color borderHoveredColor 	= null;
+	private Color borderHoveredColor 	 = null;
 	private Color borderPressedColor 	 = null;
 	
 	private Color textColor      		 = null;
@@ -67,6 +42,9 @@ public class MyJButton extends JButton {
 	private boolean hovered              = false;
 	
 	private String value                 = null;
+	
+	// ajouté
+	private MouseListener listener       = null;
 	
 	// mise en place du constructeur
 	
@@ -100,22 +78,24 @@ public class MyJButton extends JButton {
 		this.textPressedColor 		= StrToColor(TEXT_PRESSED_COLOR_DEFAULT);
 		
 		this.setValue(val);
+		this.setSize();
 		
-		font = new Font("Arial",Font.PLAIN,(int)(Math.min(height, width)*0.7f));
-		super.setFont(font); //?? est-ce la bonne approche à vérifier lors des tests
-		
-		// fixer une taille fixe....
-		super.setPreferredSize(new Dimension(this.width,this.height));
-		super.setMinimumSize(new Dimension(this.width,this.height));
-		super.setMaximumSize(new Dimension(this.width,this.height));
+		this.setMyBorder(border);
 		
 		super.setFocusable(false);
 		super.setContentAreaFilled(false);
-		
+	}
+	
+	
+	private void setSize() {
+		super.setPreferredSize(new Dimension(this.width,this.height));
+		super.setMinimumSize(new Dimension(this.width,this.height));
+		super.setMaximumSize(new Dimension(this.width,this.height));
+	}
+	
+	private void mouseListener() {
 		// mettre en place l'écouteur sur les évenements de la souris
-		
-		super.addMouseListener(new MouseAdapter() {
-			
+		listener = new MouseAdapter() {
 			public void mouseEntered(MouseEvent e){
 				hovered = true;
 				repaint();
@@ -136,9 +116,10 @@ public class MyJButton extends JButton {
 				repaint();
 			}
 			
-		});
+		};
+		super.addMouseListener(listener);
+		revalidate();
 	}
-	
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -153,12 +134,21 @@ public class MyJButton extends JButton {
 		
 		// -2  placer la surface pour préparer le background
 		g2.setColor(currentBackgroundColor);
-		g2.fillRoundRect(border/2, border/2, width-border, height-border, radius, radius);
+		
+		g2.fillRoundRect(border, border, width-2*border, height-2*border, radius, radius);
 		
 		// -3 placer le texte au dessus
 		g2.setColor(currentTextColor);
 		// vérifier lors des tests du bon positionnement 
-		g2.drawString(this.value, -pos_x_text+(width-border/2)/2, pos_y_text+(height-border/2)/2);
+		
+		//Mesurer la taille du texte via FontMetrics
+		FontMetrics fm = g2.getFontMetrics();
+		int textWidth = fm.stringWidth(value);
+		int textHeight = fm.getHeight();
+		// pos_x_text est fixé à 0
+		// pos_y_text est le résultat d'une fonction mathématique
+		g2.drawString(this.value, -pos_x_text+(width-textWidth)/2, 
+				      pos_y_text+(height/2+textHeight)/2);
 		
 		g2.dispose(); // on libère la ressource
 	}
@@ -204,6 +194,8 @@ public class MyJButton extends JButton {
 
 	public void setHeight(int height) {
 		this.height = height;
+		this.setMyBorder(this.border);
+		this.setSize();
 	}
 
 	public int getWidth() {
@@ -212,6 +204,8 @@ public class MyJButton extends JButton {
 
 	public void setWidth(int width) {
 		this.width = width;
+		this.setMyBorder(this.border);
+		this.setSize();
 	}
 
 	public int getRadius() {
@@ -228,8 +222,111 @@ public class MyJButton extends JButton {
 
 	public void setMyBorder(int border) {
 		this.border = border;
+		//modif 2
+		//on fixe la valeur max de la bordure à 30% du min(width,height)
+		this.border = (int) (this.border>Math.min(this.width, this.height)*0.3f?
+				             Math.min(this.width, this.height)*0.3f:this.border);
+		font = new Font("Arial",Font.PLAIN,
+				        (int)(Math.min(height-2*border, width-2*border)*(1.0f)));
+		
+		super.setFont(font); 
+		
+		Integer heightWidth = (int)Math.min(this.width, this.height);
+		if(this.value.charAt(0)>='0' && this.value.charAt(0)<='9') {
+			function_y_pos_number(heightWidth);
+		}
+		
+		if(this.value.charAt(0)=='*')
+			// à valider
+			this.pos_y_text=26;
+		
+		if(this.value.charAt(0)=='+') {
+			function_y_pos_plus_sign(heightWidth);
+		}
+			
+		
+	    if(this.value.charAt(0)=='-'){
+	    	function_y_pos_minus_sign(heightWidth);
+	    }
+	    
+	    if(this.value.charAt(0)=='/'){
+	    	//TODO 
+	    }
+	    
+	    if(height > width) {
+	    	//TODO la fonction pour coef
+	    	float coef = 1.5f;
+	    	this.pos_y_text = this.pos_y_text+(int)(width/coef);
+	    }
+	    
+	    this.mouseListener();
+		this.repaint();
 	}
-
+	
+	/**
+	 * Fonction pour calaculer le décalage de l'axe Y pour les chiffres
+	 * @param heightWidth
+	 */
+	private void function_y_pos_number(Integer heightWidth) {
+		this.pos_y_text = switch(heightWidth) {
+			case Integer i when i.intValue()<200 ->{
+				yield (int)(0.4714f*this.border+1.5f);
+			}
+			case Integer i when  i.intValue()<300 ->{
+				yield (int)(0.4319f*this.border+5.1209f);	
+			}
+			case Integer i when  i.intValue()<400 ->{
+				yield (int)(0.4225f*this.border+8.7451f);
+			}
+			default ->{
+				yield (int)(0.4471f*this.border+9.6471f);
+			}
+		};
+	}
+	/**
+	 * Fonction pour calaculer le décalage de l'axe Y pour le signe de soustraction
+	 * @param heightWidth
+	 */
+	private void function_y_pos_minus_sign(Integer heightWidth) {
+		this.pos_y_text = switch(heightWidth) {
+			case Integer i when i.intValue()<200 ->{
+				yield (int)(0.6f*this.border-4.8571f);
+			}
+			case Integer i when  i.intValue()<300 ->{
+				yield (int)(0.5273f*this.border-9.3636f);	
+			}
+			case Integer i when  i.intValue()<400 ->{
+				if(border<=60)
+					yield (int)(0.4f*this.border-20.0f);
+				yield (int)(0.6667*this.border-32.0f);
+			}
+			default ->{
+				yield (int)(0.4471f*this.border+9.6471f);
+			}
+		};
+	}
+	
+	/**
+	 * Fonction pour calaculer le décalage de l'axe Y pour le signe de l'addition
+	 * @param heightWidth
+	 */
+	private void function_y_pos_plus_sign(Integer heightWidth) {
+		this.pos_y_text = switch(heightWidth) {
+			case Integer i when i.intValue()<200 ->{
+				yield (int)(0.4214f*this.border+2.25f);
+			}
+			case Integer i when  i.intValue()<300 ->{
+				yield (int)(0.4509f*this.border+6.1818f);	
+			}
+			case Integer i when  i.intValue()<400 ->{
+				yield (int)(0.4431f*this.border+4.9804);
+			}
+			default ->{
+				yield (int)(0.4f*this.border+8.0f);
+			}
+		};
+	}
+	
 	public int getPos_x_text() {
 		return pos_x_text;
 	}
