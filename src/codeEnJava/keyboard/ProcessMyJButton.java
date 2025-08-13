@@ -33,12 +33,13 @@ public class ProcessMyJButton implements Runnable {
 			//int pos_y = Lecture.integerReader("Entrer la valeur de y : ", "#FF7F00");
 			String value = Lecture.stringReader("Entrer le nom de la touche", "\"#FF7F00\"", 1, 1);
 			
+			//float coef = (float) Lecture.doubleReader("La valeur du coeffient correctif", "#FF7F00");
 			
 			this.button.setMyBorder(border);
 			this.button.setRadius(10);
 			//this.button.setPos_x_text(pos_x);
 			//this.button.setPos_y_text(pos_y);
-			
+			//this.button.setCoef(coef);
 			this.button.setWidth(width);
 			this.button.setHeight(height);
 			this.button.setValue(value);

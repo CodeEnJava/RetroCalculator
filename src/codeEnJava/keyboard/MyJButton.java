@@ -46,6 +46,9 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	// ajouté
 	private MouseListener listener       = null;
 	
+	// pour les tests et mesures
+	//private  float coef = 1.0f;
+	
 	// mise en place du constructeur
 	
 	/**
@@ -255,7 +258,8 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	    
 	    if(height > width) {
 	    	//TODO la fonction pour coef
-	    	float coef = 1.5f;
+	    	float coef = function_coef();
+	    	System.out.println("coef ="+coef);
 	    	this.pos_y_text = this.pos_y_text+(int)(width/coef);
 	    }
 	    
@@ -325,6 +329,12 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 				yield (int)(0.4f*this.border+8.0f);
 			}
 		};
+	}
+	
+	private float function_coef() {
+		float p = this.height/(this.width*1.0f);
+		System.out.println("p ="+p);
+		return (float) (10.572f*Math.pow(p, -1.402f));
 	}
 	
 	public int getPos_x_text() {
@@ -438,6 +448,16 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	public void setValue(String value) {
 		this.value = value;
 	}
+
+	// modif utile uniquement pour les tests et mesures
+//	public float getCoef() {
+//		return coef;
+//	}
+//
+//
+//	public void setCoef(float coef) {
+//		this.coef = coef;
+//	}
 	
 	
 	
