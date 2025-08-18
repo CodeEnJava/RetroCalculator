@@ -262,7 +262,7 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		Integer heightWidth = (int)Math.min(this.width, this.height);
 		Character car = this.value.charAt(0);
 		switch(car) {
-			case Character c when c.charValue()>='0' && c.charValue()<='9'->{
+			case Character c when (c.charValue()>='0' && c.charValue()<='9')|| c.charValue()=='C'->{
 				function_y_pos_number(heightWidth);
 				break;
 				}

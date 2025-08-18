@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 public class TestDisplay {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		int nb = 15;
