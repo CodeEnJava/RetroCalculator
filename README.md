@@ -62,7 +62,7 @@ N'hésitez pas à liker 👍, commenter 💬 et vous abonner 🔔 pour suivre l'
 
 1. Clone le dépôt :
    ```bash
-   git clone https://github.com/CodeEnJava/RetroCalculato.git
+   git clone https://github.com/CodeEnJava/RetroCalculator.git
 
 2. Ouvre le projet dans ton IDE.
 
