@@ -52,10 +52,17 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	// mise en place du constructeur
 	
 	/**
-	 * si le deuxième parametre existe, on fixe la largeur
-	 * si le troisième parametre existe, on fixe la hauteur
-	 * si le quatrième parametre existe, on fixe le radius 
-	 * si le cinquième parametre existe, on fixe la epaisseur de la bordure
+	 * Constructeur
+	 * si le deuxième paramètre existe, on fixe la largeur
+     * si le troisième paramètre existe, on fixe la hauteur
+     * si le quatrième paramètre existe, on fixe le radius 
+     * si le cinquième paramètre existe, on fixe la épaisseur de la bordure
+     * 
+     * 
+     * if the second parameter exists, set the width
+	 * if the third parameter exists, set the height
+     * if the fourth parameter exists, set the radius 
+     * if the fifth parameter exists, set the border thickness
 	 * 
 	 * @param val
 	 * @param options
@@ -90,14 +97,23 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	}
 	
 	
+	/**
+	 * Cette méthode permet de definir la taille du bouton et la rendre non modifiable
+	 * 
+	 * This method allows you to set the button size and make it non-editable.
+	 */
 	private void setSize() {
 		super.setPreferredSize(new Dimension(this.width,this.height));
 		super.setMinimumSize(new Dimension(this.width,this.height));
 		super.setMaximumSize(new Dimension(this.width,this.height));
 	}
 	
+	/**
+	 * Cette méthode permet de mettre en place l'écouteur sur les évènements de la souris
+	 * 
+	 * This method allows you to set up the listener on mouse events.
+	 */
 	private void mouseListener() {
-		// mettre en place l'écouteur sur les évenements de la souris
 		listener = new MouseAdapter() {
 			public void mouseEntered(MouseEvent e){
 				hovered = true;
@@ -132,32 +148,34 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		
 		Graphics2D g2 = (Graphics2D)g;
 		// -1  placer la surface pour préparer la bordure
+		// -1  place the surface to prepare the border
 		g2.setColor(currentBorderColor);
 		g2.fillRoundRect(0, 0, width, height, radius, radius);
 		
-		// -2  placer la surface pour préparer le background
+		// -2  placer la surface pour préparer l'arrière plan
+		// -2  place the surface to prepare the background
 		g2.setColor(currentBackgroundColor);
 		
 		g2.fillRoundRect(border, border, width-2*border, height-2*border, radius, radius);
 		
 		// -3 placer le texte au dessus
+		// -3 place the text above
 		g2.setColor(currentTextColor);
-		// vérifier lors des tests du bon positionnement 
 		
-		//Mesurer la taille du texte via FontMetrics
 		FontMetrics fm = g2.getFontMetrics();
 		int textWidth = fm.stringWidth(value);
 		int textHeight = fm.getHeight();
-		// pos_x_text est fixé à 0
-		// pos_y_text est le résultat d'une fonction mathématique
+		
 		g2.drawString(this.value, -pos_x_text+(width-textWidth)/2, 
 				      pos_y_text+(height/2+textHeight)/2);
 		
-		g2.dispose(); // on libère la ressource
+		g2.dispose(); // on libère la ressource :we release the resource
 	}
 	
 	@Override
 	protected void paintBorder(Graphics g) {
+		// Permet de supprimer la bordure native du composant ( Ici le JButton)
+		// Allows you to remove the native border of the component (in this case, the JButton).
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setColor(new Color(255,255,255,0));
 		g2.setStroke(new BasicStroke(1));
@@ -168,6 +186,9 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	
 	/**
 	 * Cette méthode permet de convertir une expression couleur au format #AABBCC en format RGB(R,G,B)
+	 * 
+	 * This method converts a color expression in #AABBCC format to RGB(R,G,B) format.
+	 * 
 	 * @param color
 	 * @return	un Objet de type Color
 	 */
@@ -223,6 +244,10 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		return border;
 	}
 
+	/**
+	 * 
+	 * @param border
+	 */
 	public void setMyBorder(int border) {
 		this.border = border;
 		//modif 2
@@ -278,7 +303,7 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	}
 	
 	/**
-	 * Fonction pour calaculer le décalage de l'axe Y pour les chiffres
+	 * Fonction pour calculer le décalage de l'axe Y pour les chiffres
 	 * @param heightWidth
 	 */
 	private void function_y_pos_number(Integer heightWidth) {
@@ -298,7 +323,7 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		};
 	}
 	/**
-	 * Fonction pour calaculer le décalage de l'axe Y pour le signe de soustraction
+	 * Fonction pour calculer le décalage de l'axe Y pour le signe de soustraction
 	 * @param heightWidth
 	 */
 	private void function_y_pos_minus_sign(Integer heightWidth) {
@@ -321,7 +346,7 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	}
 	
 	/**
-	 * Fonction pour calaculer le décalage de l'axe Y pour le signe de l'addition
+	 * Fonction pour calculer le décalage de l'axe Y pour le signe de l'addition
 	 * @param heightWidth
 	 */
 	private void function_y_pos_plus_sign(Integer heightWidth) {
