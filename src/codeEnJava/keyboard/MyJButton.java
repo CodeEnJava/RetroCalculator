@@ -282,8 +282,8 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 				break;
 			}
 			
-			case Character c when c.charValue()=='-' ->{
-				//TODO
+			case Character c when c.charValue()=='/' ->{
+				function_y_pos_div_sign( heightWidth);
 				break;
 			}
 			
@@ -362,6 +362,27 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 			}
 			default ->{
 				yield (int)(0.4f*this.border+8.0f);
+			}
+		};
+	}
+	
+	/**
+	 * Fonction pour calculer le décalage de l'axe Y pour le signe div
+	 * @param heightWidth
+	 */
+	private void function_y_pos_div_sign(Integer heightWidth) {
+		this.pos_y_text = switch(heightWidth) {
+			case Integer i when i.intValue()<200 ->{
+				yield (int)(-0.0076f*Math.pow(this.border, 2)+0.7286f*this.border+0.6905f);
+			}
+			case Integer i when  i.intValue()<300 ->{
+				yield (int)(0.0002f*Math.pow(this.border, 3)-0.0202f*Math.pow(this.border, 2)+1.0059f*this.border+0.7912f);	
+			}
+			case Integer i when  i.intValue()<400 ->{
+				yield (int)(2.1561f*this.border-6.0175f);
+			}
+			default ->{
+				yield (int)(0.4374f*this.border+11.749f);
 			}
 		};
 	}
