@@ -235,29 +235,39 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		super.setFont(font); 
 		
 		Integer heightWidth = (int)Math.min(this.width, this.height);
-		if(this.value.charAt(0)>='0' && this.value.charAt(0)<='9') {
-			function_y_pos_number(heightWidth);
-		}
-		
-		if(this.value.charAt(0)=='*')
-			// à valider
-			this.pos_y_text=26;
-		
-		if(this.value.charAt(0)=='+') {
-			function_y_pos_plus_sign(heightWidth);
-		}
+		Character car = this.value.charAt(0);
+		switch(car) {
+			case Character c when c.charValue()>='0' && c.charValue()<='9'->{
+				function_y_pos_number(heightWidth);
+				break;
+				}
 			
+			case Character c when c.charValue()=='*' ->{
+				this.pos_y_text=26;
+				break;
+			}
+			
+			case Character c when c.charValue()=='+' ->{
+				function_y_pos_plus_sign(heightWidth);
+				break;
+			}
+			
+			case Character c when c.charValue()=='-' ->{
+				function_y_pos_minus_sign(heightWidth);
+				break;
+			}
+			
+			case Character c when c.charValue()=='-' ->{
+				//TODO
+				break;
+			}
+			
+		default -> throw new IllegalArgumentException("Unexpected value: " + car);
+		}
 		
-	    if(this.value.charAt(0)=='-'){
-	    	function_y_pos_minus_sign(heightWidth);
-	    }
-	    
-	    if(this.value.charAt(0)=='/'){
-	    	//TODO 
-	    }
+		
 	    
 	    if(height > width) {
-	    	//TODO la fonction pour coef
 	    	float coef = function_coef();
 	    	System.out.println("coef ="+coef);
 	    	this.pos_y_text = this.pos_y_text+(int)(width/coef);
