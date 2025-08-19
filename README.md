@@ -27,6 +27,8 @@ Ce dépôt accompagne la vidéo YouTube dans laquelle je présente :
 ---
 📺 [Tutoriel complet: Machine à calculer vidéo #07](https://youtu.be/dMaO03xb8X0)
 ---
+📺 [Tutoriel complet: Machine à calculer vidéo #08](https://youtu.be/QQ4ljKKJsd4)
+---
 
 N'hésitez pas à liker 👍, commenter 💬 et vous abonner 🔔 pour suivre l'évolution du projet et d'autres tutoriels Java !
 
