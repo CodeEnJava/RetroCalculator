@@ -10,9 +10,6 @@ public class ProcessMyJButton implements Runnable {
 	private MyJButton button = null;
 	private JFrame frame = null;
 	
-	
-	
-	
 	public ProcessMyJButton(MyJButton button, JFrame frame) {
 		super();
 		this.button = button;
@@ -45,7 +42,5 @@ public class ProcessMyJButton implements Runnable {
 			this.button.setValue(value);
 			frame.repaint();
 		}
-
 	}
-
 }
