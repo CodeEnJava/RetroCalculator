@@ -80,6 +80,7 @@ Une question ? Une suggestion ?
 
 🛠️ Auteur
 [BAROIS Stéphane]
+---
 📺 Chaîne YouTube : [https://www.youtube.com/@BSDEV-JAVA]
 ---
 🐙 GitHub : [@CodeEnJava]
