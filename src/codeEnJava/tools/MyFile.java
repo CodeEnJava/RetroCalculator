@@ -20,7 +20,7 @@ public class MyFile {
 		if(tab_list_files== null)
 			return null;
 		
-		Stack<File> stack  = new Stack<>(32000);
+		Stack<File> stack  = new Stack<>(128000);
 		String pathForder = null;
 		
 		// remplir la pile
