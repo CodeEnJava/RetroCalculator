@@ -1,8 +1,11 @@
-package codeEnJava.displays;
+package codeEnJava.displays_tests;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+
+import codeEnJava.displays.Display;
+import codeEnJava.displays.ProcessDisplay;
 
 public class TestDisplay {
 

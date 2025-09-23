@@ -1,8 +1,11 @@
-package codeEnJava.keyboard;
+package codeEnJava.keyboard_tests;
 
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
+
+import codeEnJava.keyboard.MyJButton;
+import codeEnJava.keyboard.ProcessMyJButton;
 
 public class TestMyJButton {
 

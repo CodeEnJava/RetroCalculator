@@ -1,10 +1,13 @@
-package codeEnJava.displays;
+package codeEnJava.displays_tests;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import codeEnJava.displays.Digit7Seg;
+import codeEnJava.displays.Process7segments;
 
 public class TestDigit7Seg {
 
