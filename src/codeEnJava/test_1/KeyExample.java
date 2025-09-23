@@ -9,7 +9,9 @@ import codeEnJava.keyboard.MyJButton;
 
 public class KeyExample {
 	private MyJButton key = null;
+	@SuppressWarnings("unused")
 	private Display display = null;
+	@SuppressWarnings("unused")
 	private String val = null;
 	
 	public KeyExample(int width, int height, String val, Display display) {
