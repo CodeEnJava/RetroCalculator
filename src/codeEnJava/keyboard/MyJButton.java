@@ -41,6 +41,9 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	private boolean pressed              = false;
 	private boolean hovered              = false;
 	
+	// modif ajouter 
+	private boolean released             = true;
+	
 	private String value                 = null;
 	
 	// ajouté
@@ -127,11 +130,13 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 			
 			public void mousePressed(MouseEvent e){
 				pressed = true;
+				released = false;
 				repaint();
 			}
 			
 			public void mouseReleased(MouseEvent e){
 				pressed = false;
+				released = true;
 				repaint();
 			}
 			
@@ -503,6 +508,11 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	// ajouté
+	public boolean isReleased() {
+		return released;
 	}
 
 	// modif utile uniquement pour les tests et mesures

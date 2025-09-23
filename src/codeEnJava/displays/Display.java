@@ -21,8 +21,8 @@ public class Display {
 	public Display(int nbdigit, int height) {
 		super();
 		//ici modif exceptionnelle, j'utilise un PC Windows
-		String root ="C:\\Users\\stebar\\Documents\\";// chemin pour le mac  --->"/Users/steph.barois.dev/Desktop";
-		
+		//String root ="C:\\Users\\stebar\\Documents\\";// chemin pour le mac  --->"/Users/steph.barois.dev/Desktop";
+		String root ="/Users/steph.barois.dev/Desktop";
 		if(nbdigit<1)
 			this.nbDigit = 1;
 		else
