@@ -39,6 +39,7 @@ public class Grid2D {
 		this.cells = new JLabel[this.columns*this.rows];
 		
 		this.grid2D = new JPanel();
+		//this.grid2D.setPreferredSize(new Dimension(this.width*this.columns,this.height*this.rows));
 		this.grid2D.setLayout(new GridBagLayout());
 		
 		this.gbc = new GridBagConstraints();
