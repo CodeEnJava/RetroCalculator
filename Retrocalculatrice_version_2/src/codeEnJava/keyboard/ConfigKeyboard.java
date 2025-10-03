@@ -26,4 +26,6 @@ public interface ConfigKeyboard {
 		public static final String TEXT_PRESSED_COLOR_DEFAULT   	 	= "#505050";
 		
 		// fin constantes pour la classe MyJButton
+		
+		
 }

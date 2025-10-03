@@ -102,7 +102,6 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	
 	/**
 	 * Cette méthode permet de definir la taille du bouton et la rendre non modifiable
-	 * 
 	 * This method allows you to set the button size and make it non-editable.
 	 */
 	private void setSize() {
@@ -113,7 +112,6 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 	
 	/**
 	 * Cette méthode permet de mettre en place l'écouteur sur les évènements de la souris
-	 * 
 	 * This method allows you to set up the listener on mouse events.
 	 */
 	private void mouseListener() {
@@ -259,25 +257,40 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		//on fixe la valeur max de la bordure à 30% du min(width,height)
 		this.border = (int) (this.border>Math.min(this.width, this.height)*0.3f?
 				             Math.min(this.width, this.height)*0.3f:this.border);
-		font = new Font("Arial",Font.PLAIN,
-				        (int)(Math.min(height-2*border, width-2*border)*(1.0f)));
 		
+		if(this.value.length()==1 && !(this.value.charAt(0)>='A' && this.value.charAt(0)<='Z'))
+			font = new Font("Arial",Font.PLAIN,
+				        (int)(Math.min(height-2*border, width-2*border)*(1.0f)));
+		else {
+			System.out.println("char value = "+this.value);
+			font = new Font("Arial",Font.PLAIN,(int)(Math.min(height-2*border, width-2*border)*(1.0f)/2.5));
+			this.pos_y_text = (int)((height-2*border)/4);
+			this.mouseListener();
+			this.repaint();
+			return;
+		}
 		super.setFont(font); 
 		
+		
+				
 		Integer heightWidth = (int)Math.min(this.width, this.height);
 		Character car = this.value.charAt(0);
+		System.out.println("car ="+car);
 		switch(car) {
-			case Character c when (c.charValue()>='0' && c.charValue()<='9')|| c.charValue()=='C'->{
+		
+			case Character c when (c.charValue()>='0' && c.charValue()<='9') 
+			                       || c.charValue() =='%' 
+			                       || c.charValue()=='.'->{
 				function_y_pos_number(heightWidth);
 				break;
 				}
 			
 			case Character c when c.charValue()=='*' ->{
-				this.pos_y_text=26;
+				this.pos_y_text=13;//prévoir tests en fonction de la hauteur: valeur avant modif 26
 				break;
 			}
 			
-			case Character c when c.charValue()=='+' ->{
+			case Character c when c.charValue()=='+' || c.charValue()=='='->{
 				function_y_pos_plus_sign(heightWidth);
 				break;
 			}
@@ -287,7 +300,9 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 				break;
 			}
 			
-			case Character c when c.charValue()=='/' ->{
+			case Character c when c.charValue()=='/' || 
+					              c.charValue()=='÷' || 
+					              c.charValue()=='±' ->{
 				function_y_pos_div_sign( heightWidth);
 				break;
 			}

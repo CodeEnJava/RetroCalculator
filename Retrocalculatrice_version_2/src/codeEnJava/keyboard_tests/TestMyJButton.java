@@ -1,6 +1,7 @@
 package codeEnJava.keyboard_tests;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 
@@ -18,7 +19,7 @@ public class TestMyJButton {
 		
 		MyJButton button1  = new MyJButton("+",100,100);
 		
-		MyJButton button2  = new MyJButton("0", 200,200);
+		MyJButton button2  = new MyJButton("\u00B9\u2044\u2093", 100,100);
 		
 		button1.setMyBorder(10);
 		button1.setRadius(15);
@@ -34,7 +35,7 @@ public class TestMyJButton {
 		button1.setTextColor("#000000");
 		
 		button2.setMyBorder(10);
-		button2.setRadius(60);
+		button2.setRadius(15);
 		
 		button2.setBackgroundColor("#ff0000");
 		button2.setBackgroundHoveredColor("#00ff00");
@@ -51,13 +52,10 @@ public class TestMyJButton {
 		frame.repaint();
 		frame.setVisible(true);
 		
-		ProcessMyJButton process = new ProcessMyJButton(button1, frame);
-		Thread th = new Thread(process);
-		
-		th.start();
-		
-		
-		
+//		ProcessMyJButton process = new ProcessMyJButton(button1, frame);
+//		Thread th = new Thread(process);
+//		
+//		th.start();
 		
 	}
 

@@ -42,7 +42,7 @@ public class TestMyJButton {
 		button2.setBackgroundPressedColor("#0000ff");
 		
 		button2.setBorderColor("#ffAA15");
-		button2.setBorderHoveredColor("#15ffAA");
+		button2.setBorderHoveredColor("#15ffAA");		
 		button2.setBorderPressedColor("#30AAff");
 		
 		button2.setTextColor("#000000");
@@ -55,8 +55,8 @@ public class TestMyJButton {
 		
 		frame.add(grid2d.getGrid2D());
 		
-		frame.repaint();
-		frame.setVisible(true);
+		frame.setVisible(true);		
+		
 	}
 
 }
