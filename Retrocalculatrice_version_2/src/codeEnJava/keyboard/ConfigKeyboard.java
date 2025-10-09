@@ -27,6 +27,17 @@ public interface ConfigKeyboard {
 		
 		// fin constantes pour la classe MyJButton
 		
+		
+		//---------------------------------------------------------------------------
+		
+		// Constantes pour le DISPLAY
+		
+		public static final int NBDIGITS                                = 15 ;
+		public static final int SEVENSEGWIDTH                           = (int)((10/3.0)*NBDIGITS);
+		
+		
+		//---------------------------------------------------------------------------
+		
 		// configuration du keyboard
 		
 		// backgroundColor
@@ -59,8 +70,13 @@ public interface ConfigKeyboard {
 		
 		public static final int    BORDERTHICKNESS                     = 3;
 		public static final int    BORDERRADIUS                        = 10;
-		public static final int    KEYWIDTH                            = 50;
-		public static final int    KEYHEIGHT                           = 50;
+		public static final int    KEYWIDTH                            = (int)(2.5*SEVENSEGWIDTH);
+		public static final int    KEYHEIGHT                           = (int)(2.5*SEVENSEGWIDTH);;
+		
+		public static final int    ROWS                                = 5;
+		public static final int    COLUMNS                             = 6;
+		
+		
 		
 		
 }
