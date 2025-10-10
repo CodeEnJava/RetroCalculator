@@ -12,9 +12,9 @@ public class TestKeyBoard {
 		JFrame frame = new JFrame("Test KeyBoard");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new FlowLayout(0, 50, 50));
-		frame.setSize(350,300);
+		frame.setSize(400,500);
 		
-		KeyBoard keyboard = new KeyBoard(null);
+		KeyBoard keyboard = new KeyBoard();
 		frame.add(keyboard.getGrid2D());
 		
 		frame.setVisible(true);
