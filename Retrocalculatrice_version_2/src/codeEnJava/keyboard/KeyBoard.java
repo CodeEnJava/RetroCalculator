@@ -93,12 +93,12 @@ public class KeyBoard implements ConfigKeyboard {
 	private MyJButton[] keys = null;
 	private Grid2D grid2d = null;
 	
-	public KeyBoard() {
+	public KeyBoard(Display[] displays) {
 		super();
-		this.keys = new MyJButton[keysName.length];
+		this.keys = new JKey[keysName.length];
 		
 		for(int i=0;i<keysName.length;i++) {
-			keys[i] = new MyJButton(keysName[i],width,height);
+			keys[i] = new JKey(displays,keysName[i],width,height);
 			keys[i].setBackgroundColor(bgc[i]);
 			keys[i].setBackgroundHoveredColor(bgHovered[i]);
 			keys[i].setBackgroundPressedColor(bgPressed[i]);

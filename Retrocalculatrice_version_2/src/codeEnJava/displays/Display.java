@@ -1,5 +1,6 @@
 package codeEnJava.displays;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -32,6 +33,12 @@ public class Display {
 		this.height= height;
 		this.tabDigit = new Digit7Seg[this.nbDigit];
 		this.display = new JPanel(new GridLayout(1,this.nbDigit,0,0));
+		
+		//--------------------------------------------------------------
+		// modif pour la vidéo 12
+		   this.display.setOpaque(true);
+		   this.display.setBackground(Color.BLACK);
+		//--------------------------------------------------------------
 		
 		for(int i = this.nbDigit-1;i>=0;i--) {
 			this.tabDigit[i] = new Digit7Seg(root, height);

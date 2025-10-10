@@ -43,12 +43,17 @@ public class Grid2D {
 		//this.grid2D.setPreferredSize(new Dimension(this.width*this.columns,this.height*this.rows));
 		this.grid2D.setLayout(new GridBagLayout());
 		
+		
 		this.gbc = new GridBagConstraints();
 		this.gbc.fill = GridBagConstraints.BOTH; // le composant occupe toute la surface de la cellule
 		this.gbc.weightx = 1.0;
 		this.gbc.weighty = 1.0;
+		
+		//---------------------------------------------------------------
+		// fixer la couleur du background pour l'objet JPanel --> grid2D
 		grid2D.setOpaque(true);
 		grid2D.setBackground(Color.BLACK);
+		//---------------------------------------------------------------
 		
 		for(int row = 0;row<this.rows;row++) {
 			for(int col= 0; col<this.columns;col++) {
@@ -81,7 +86,13 @@ public class Grid2D {
 		return grid2D;
 	}
 	
-	
+	/**
+	 * 
+	 * @param button
+	 * @param column
+	 * @param row
+	 * @param nbcells
+	 */
 	public void put(MyJButton button,int column,int row,int ...nbcells) {
 		
 		if(nbcells == null || nbcells.length !=2) {
@@ -111,6 +122,85 @@ public class Grid2D {
 		grid2D.add(button,gbc);
 	}
 	
-
+	/**
+	 * 
+	 * @param button
+	 * @param column
+	 * @param row
+	 * @param nbcells
+	 */
+	public void put(JPanel panel,int column,int row,int ...nbcells) {
+		
+		if(nbcells == null || nbcells.length !=2) {
+			this.nbx = 1;
+			this.nby = 1;
+		}else {
+			this.nbx = nbcells[0];
+			this.nby = nbcells[1];
+		}
+		
+		this.gbc.gridx = column;
+		this.gbc.gridy = row;
+		
+		// suppression des composants avant injections du bouton
+		for(int y= row; y<row+nby;y++) {
+			for(int x=column;x<column+nbx;x++) {
+				this.grid2D.remove(cells[y*this.columns+x]);
+			}
+		}
+		
+		gbc.gridwidth = nbx;
+		gbc.gridheight= nby;
+		
+		panel.setBounds(new Rectangle(nbx*this.width,nby*this.height));
+		grid2D.add(panel,gbc);
+	}
 	
+	/**
+	 * Cette méthode permet de convertir une expression couleur au format #AABBCC en format RGB(R,G,B)
+	 * @param color
+	 * @return	un Objet de type Color
+	 */
+	
+	private Color StrToColor(String color) {
+		if(color == null || !color.contains("#") || color.length()!=7)
+			return Color.BLACK;
+		else {
+			
+			int red = Integer.parseInt(color.substring(1, 3),16);
+			int green = Integer.parseInt(color.substring(3, 5),16);
+			int blue = Integer.parseInt(color.substring(5),16);
+			return new Color(red,green,blue);
+		}
+
+	}
+	
+	/**
+	 * 
+	 * @param color
+	 */
+	public void setBorderColor(String color) {
+		//création des bordures
+		Border border= BorderFactory.createLineBorder(StrToColor(color), BORDERLINETHICKNESS);
+		for(int row = 0;row<this.rows;row++) {
+			for(int col= 0; col<this.columns;col++) {
+				int pointer = row*this.columns+col;
+				
+				cells[pointer].setBorder(border);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param color
+	 */
+	public void setBackgroundColor(String color){
+		for(int row = 0;row<this.rows;row++) {
+			for(int col= 0; col<this.columns;col++) {
+				int pointer = row*this.columns+col;
+				cells[pointer].setBackground(StrToColor(color));;
+			}
+		}
+	}
 }

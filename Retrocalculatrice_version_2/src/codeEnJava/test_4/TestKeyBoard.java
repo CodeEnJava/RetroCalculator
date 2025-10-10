@@ -14,7 +14,7 @@ public class TestKeyBoard {
 		frame.setLayout(new FlowLayout(0, 50, 50));
 		frame.setSize(400,500);
 		
-		KeyBoard keyboard = new KeyBoard();
+		KeyBoard keyboard = new KeyBoard(null);
 		frame.add(keyboard.getGrid2D());
 		
 		frame.setVisible(true);
