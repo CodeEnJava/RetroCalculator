@@ -159,6 +159,12 @@ public class Digit7Seg {
 			      this.setMargin_top(0);
 			      this.setFontSize((int)(height2*0.7f));
 			      break;
+			      
+			case '÷':
+			      this.setMargin_left(this.fn_left_sub(height2));
+			      this.setMargin_top(-15);
+			      this.setFontSize((int)(height2*1.0f));
+			      break;
 			
 			case '/':
 			      this.setMargin_left(this.fn_left_div(height2));
