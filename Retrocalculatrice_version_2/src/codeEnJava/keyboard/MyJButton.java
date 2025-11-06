@@ -280,17 +280,26 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 		
 			case Character c when (c.charValue()>='0' && c.charValue()<='9') 
 			                       || c.charValue() =='%' 
-			                       || c.charValue()=='.'->{
+			                       || c.charValue()=='.'||
+			                    	  c.charValue()=='(' ||
+									  c.charValue()==')'->{
 				function_y_pos_number(heightWidth);
 				break;
 				}
+			
+			case Character c when (c.charValue()=='(' ||
+				                   c.charValue()==')')->{
+					  function_y_pos_number((int)(heightWidth));
+					  break;
+				  }
 			
 			case Character c when c.charValue()=='*' ->{
 				this.pos_y_text=13;//prévoir tests en fonction de la hauteur: valeur avant modif 26
 				break;
 			}
 			
-			case Character c when c.charValue()=='+' || c.charValue()=='='->{
+			case Character c when c.charValue()=='+' || 
+					              c.charValue()=='=' ->{
 				function_y_pos_plus_sign(heightWidth);
 				break;
 			}
@@ -301,7 +310,7 @@ public class MyJButton extends JButton implements ConfigKeyboard{
 			}
 			
 			case Character c when c.charValue()=='/' || 
-					              c.charValue()=='÷' || 
+					              c.charValue()=='÷' ||
 					              c.charValue()=='±' ->{
 				function_y_pos_div_sign( heightWidth);
 				break;
