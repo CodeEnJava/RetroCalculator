@@ -2,6 +2,7 @@ package codeEnJava.dataStructures;
 
 import fr.bs.dev.StrucData.Array;
 import fr.bs.dev.StrucData.Stack;
+import fr.bs.dev.input.Lecture;
 
 public class JBtree {
 
@@ -15,7 +16,13 @@ public class JBtree {
 		this.infixe = infixe;
 		if(isWellBracket()) {
 			System.out.println("Expression infixe correcte");
+			
 			stringToArray();
+			// pour les tests
+			for(int pt =0;pt<array_infixe.size();pt++) {
+				System.out.println("tab["+pt+"]= "+array_infixe.get(pt));
+			}
+			// fin des tests
 			createBtree();
 			pathPrefixe();
 		}else {
@@ -35,8 +42,44 @@ public class JBtree {
 		
 	}
 
+	/**
+	 * cette méthode sera appelée si et seulement si l'expression infixe est valide
+	 */
 	private void stringToArray() {
-		// TODO Auto-generated method stub
+		array_infixe = new Array<String>();
+		
+		int pt_current = 0;
+		int pt_next = 0;
+		String v = null;
+		char c = 0;
+		
+		//parcourir la chaine qui contient l'expression infixe
+		do {
+			v = infixe.substring(pt_current,pt_current+1);
+			c = v.charAt(0);
+			if(isBracket(c) || isOperator(c)) {
+				array_infixe.addToEnd(v);
+				pt_current ++;
+			}else {
+				// on doit récupérer le nombre
+				pt_next = pt_current;
+				do {
+					v = infixe.substring(pt_next,pt_next+1);
+					c = v.charAt(0);
+					pt_next ++;
+					
+				}while(!isOperator(c) && !isBracket(c) && pt_next < infixe.length());
+				
+				if(pt_next >=infixe.length()) {
+					array_infixe.addToEnd(infixe.substring(pt_current));
+					pt_current = pt_next;
+				}else {
+					array_infixe.addToEnd(infixe.substring(pt_current,pt_next-1));
+					pt_current =  pt_next -1;
+				}
+			}
+			
+		}while(pt_current<infixe.length());
 		
 	}
 	
@@ -60,7 +103,7 @@ public class JBtree {
 		int pointer = 0;
 		while(pointer<infixe.length()) {
 			String caractere = infixe.substring(pointer, pointer+1);
-			System.out.println("Ligne 63: caractere ="+caractere);
+			//System.out.println("Ligne 63: caractere ="+caractere);
 			if(caractere.equals("("))
 				stack.push("(");
 			
@@ -78,8 +121,30 @@ public class JBtree {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	private boolean isBracket(char c) {
+		return c == '(' || c == ')';
+	}
 	
-	
-	
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	private boolean isOperator(char c) {
+		boolean op= false;
+		switch(c) {
+		case '+','-','*','/','%':
+			op = true;
+			break;
+		default:
+			op = false;
+		}
+		return op;
+	}
 	
 }
