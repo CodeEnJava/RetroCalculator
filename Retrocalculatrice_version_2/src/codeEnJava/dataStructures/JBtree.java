@@ -7,6 +7,7 @@ import fr.bs.dev.input.Lecture;
 public class JBtree {
 
 	private JNode root = null;
+	Stack<JNode> btree =  null;
 	private String infixe = null;
 	private Array<String> array_infixe = null;
 	private Array<String> array_prefixe = null;
@@ -19,9 +20,9 @@ public class JBtree {
 			
 			stringToArray();
 			// pour les tests
-			for(int pt =0;pt<array_infixe.size();pt++) {
-				System.out.println("tab["+pt+"]= "+array_infixe.get(pt));
-			}
+			//for(int pt =0;pt<array_infixe.size();pt++) {
+			//	System.out.println("tab["+pt+"]= "+array_infixe.get(pt));
+			//}
 			// fin des tests
 			createBtree();
 			pathPrefixe();
@@ -38,9 +39,56 @@ public class JBtree {
 	}
 
 	private void createBtree() {
-		// TODO Auto-generated method stub
-		
+		btree = new Stack<JNode>();
+		for(int pt=0;pt<array_infixe.size();pt++) {
+			int type = typeOperator(array_infixe.get(pt));
+			switch(type) {
+			case 1: 
+					// opérateur + ou - même niveau de priorité
+					// il y a deux cas , si la pile contient plus d'un élément
+					// on dépile
+					//System.out.println("size ="+this.btree.getLen());
+					if(this.btree.getLen()>1)
+						this.decompStack();
+					JNode op1Node = new JNode(array_infixe.get(pt));
+					op1Node.setLeftChild(this.btree.pop());
+					this.btree.push(op1Node);
+					break;
+			case 2:
+					// Opérateur *
+					// il faudra prendre en compte les règles de priorité 
+				    // pour les prochaines vidéo.
+					JNode op2Node = new JNode(array_infixe.get(pt));
+					op2Node.setLeftChild(this.btree.pop());
+					this.btree.push(op2Node);
+					break;
+					
+			default:
+				JNode numberNode = new JNode(array_infixe.get(pt));
+				this.btree.push(numberNode);
+			}
+			
+		}
+		// fin de la construction de l'arbre
+		this.decompStack();
 	}
+	
+	
+	
+	public JNode getRoot() {
+		return root;
+	}
+
+	private void decompStack() {
+		do {
+			JNode _popOne = this.btree.pop();
+			JNode _popTwo = this.btree.pop();
+			_popTwo.setRightChild(_popOne);
+			this.btree.push(_popTwo);
+		}while (this.btree.getLen() != 1);
+		this.root = btree.peek();
+	}
+	
 
 	/**
 	 * cette méthode sera appelée si et seulement si l'expression infixe est valide
@@ -147,4 +195,25 @@ public class JBtree {
 		return op;
 	}
 	
+	
+	private int typeOperator(String s) {
+		int op =-1;
+		switch(s) {
+		case "+","-":
+			op=1;
+			break;
+		case "*":
+			op = 2;
+			break;
+		case "/":
+			op = 3;
+			break;
+		case "%":
+			op = 4;
+			break;
+		default:
+			op= -1;
+		}
+		return op;
+	}
 }
